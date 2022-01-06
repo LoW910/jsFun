@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scroll Project</title>
+    <title>Scroll</title>
     <link rel="stylesheet" href="style.css">
     <!-- font-awesome -->
     <link
@@ -14,7 +14,86 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <!-- header -->
+    <header id="home">
+        <!-- navBar -->
+        <nav id="nav">
+            <div class="nav-center">
+                <div class="nav-header">
+                    <img src="./logo.svg" alt="logo" class="logo">
+                    <button class="nav-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+                <!-- links -->
+                <div class="links-container">
+                    <ul class="links">
+                        <li>
+                            <a href="#home" class="scroll-link">home</a>
+                        </li>
+                        <li>
+                            <a href="#about" class="scroll-link">about</a>
+                        </li>
+                        <li>
+                            <a href="#services" class="scroll-link">services</a>
+                        </li>
+                        <li>
+                            <a href="#tours" class="scroll-link">tours</a>
+                        </li>
+                        <li>
+                            <a href="#home" class="scroll-link">home</a>
+                        </li>
+                        <li>
+                            <a href="#about" class="scroll-link">about</a>
+                        </li>
+                        <li>
+                            <a href="#services" class="scroll-link">services</a>
+                        </li>
+                        <li>
+                            <a href="#tours" class="scroll-link">tours</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+        <!-- banner -->
+        <div class="banner">
+            <div class="container">
+                <h1>Scroll Project</h1>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis corrupti vitae eaque distinctio numquam eveniet voluptate aliquid adipisci obcaecati error!</p>
+                <a href="#tours" class="scroll-link btn btn-white">Explore Tours</a>
+            </div>
+        </div>
+    </header>
+    <!-- about -->
+    <section id="about">
+        <div class="title">
+            <h2>About <span>us</span></h2>
+        </div>
+    </section>
+    <!-- services -->
+    <section id="services">
+        <div class="title">
+            <h2>Our <span>Services</span></h2>
+        </div>
+    </section>
+    <!-- tours -->
+    <section id="tours">
+        <div class="title">
+            <h2>Explore <span>Tours</span></h2>
+        </div>
+    </section>
+    <!-- footer -->
+    <footer class="section">
+        <p>
+            copyright &copy; backroads travel tours company <span id="date"></span>. all rights reserved
+        </p>
+    </footer>
+    <!-- back to top -->
+    <a href="#home" class="scroll-link top-link">
+        <i class="fa fa-arrow-up"></i>
+    </a>
 
     <script src="app.js"></script>
 </body>
