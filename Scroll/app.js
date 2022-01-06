@@ -37,7 +37,7 @@ const topLink = document.querySelector('.top-link');
 
 
 window.addEventListener("scroll", function() {
-    console.log(window.scrollY);
+    // console.log(window.scrollY);
     const scrollHeight = window.scrollY;
     const navHeight = navbar.getBoundingClientRect().height;
 
@@ -59,3 +59,23 @@ window.addEventListener("scroll", function() {
 // ******************** smooth scroll ***********************
 
 // select links
+const scrollLinks = document.querySelectorAll('.scroll-link');
+
+scrollLinks.forEach(function(link) {
+    link.addEventListener('click', function(e) {
+        // prevent default
+        e.preventDefault();
+        // nav to specific spot
+        const id = e.currentTarget.getAttribute('href').slice(1);
+        // console.log(id);
+        const element = document.getElementById(id);
+
+        let position = element.offsetTop;
+        console.log(position);
+        window.scrollTo({
+            left:0,
+            top:position,
+        });
+        linksContainer.style.height = 0;
+    });
+});
