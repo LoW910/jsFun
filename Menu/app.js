@@ -1,3 +1,9 @@
+// get only unique categories - HARDEST ONE
+// iterate over categories return buttons
+// make sure to select buttons when they are available
+
+
+
 // items
 const menu = [
     {
@@ -72,53 +78,86 @@ const menu = [
         img: "./images/item-9.jpeg",
         desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
     },
+    {
+        id: 10,
+        title: "steak dinner",
+        category: "dinner",
+        price: 39.99,
+        img: "./images/item-10.jpeg",
+        desc: `skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.`,
+    },
 ];
 
-const sectionCenter = document.getElementsByClassName('.section-center');
-const filterBtns = document.querySelectorAll('.filter-btn');
-
-
-
-
+const sectionCenter = document.querySelector('.section-center');
+const btnContainer = document.querySelector('.btn-container');
 
 // load items
 window.addEventListener('DOMContentLoaded', function () {
-    console.log("DOM is loaded!");
     displayMenuItems(menu);
+    displayMenuButtons(btnContainer);
+    
 });
 
-// filter items
-filterBtns.forEach(function (btn) {
-    btn.addEventListener('click', function(e) {
-        console.log("filter button clicked");
-        console.log(e.currentTarget.dataset);
-    })
-})
-
-
-
-
-
 function displayMenuItems(menuItems) {
-    console.log('inside displayMenuItems');
-    let displayMenu = menuItems.map(function (item) {
-        // console.log(item.title, '| title');
     
+    let displayMenu = menuItems.map(function (item) {
+        
         return ` <article class="menu-item">
-                    <img src="${item.img}" alt="menu item" class="photo">
-                    <div class="item-info">
-                        <header>
-                            <h4>${item.title}</h4>
-                            <h4 class="price">${item.price}</h4>
-                        </header>
-                        <p class="item-text">${item.text}</p>
-                    </div>
-                </article>`
+        <img src="${item.img}" alt="menu item" class="photo">
+        <div class="item-info">
+        <header>
+        <h4>${item.title}</h4>
+        <h4 class="price">${item.price}</h4>
+        </header>
+        <p class="item-text">${item.desc}</p>
+        </div>
+        </article>`;
     });
     
     displayMenu = displayMenu.join('');
-    // console.log(displayMenu);
     sectionCenter.innerHTML =  displayMenu;
-    // console.log()
     
 }
+
+function displayMenuButtons() {
+
+    const categories = menu.reduce(function (values, item) {
+        if( !values.includes(item.category)){
+            values.push(item.category);
+        }
+        
+        return values;
+    }, ['all'])
+    
+    const categoryBtns = categories.map(function (category) {
+        return `<button class="filter-btn" data-id="${category}">${category}</button>`
+    }).join('');
+    
+    btnContainer.innerHTML = categoryBtns 
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    
+    // filter items
+    filterBtns.forEach(function (btn) {
+        btn.addEventListener('click', function(e) {
+            // console.log("filter button clicked");
+            // console.log(e.currentTarget.dataset);
+            const category = e.currentTarget.dataset.id;
+            const menuCategory = menu.filter(function(menuItem) {
+                // console.log(menuItem.category);
+                if (menuItem.category === category) {
+                    console.log('inside, if category');
+                    return menuItem;
+                }
+            });
+            // console.log(menuCategory);
+            if (category === 'all') {
+                console.log('inside, if all');
+                displayMenuItems(menu);
+            } else {
+                displayMenuItems(menuCategory);
+            }
+        });
+    });
+    
+}
+
