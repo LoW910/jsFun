@@ -2,7 +2,7 @@
 const alert = document.querySelector('.alert');
 const form = document.querySelector('.grocery-form');
 const grocery = document.getElementById('grocery');
-const submtBtn = document.querySelector('.submit-btn');
+const submitBtn = document.querySelector('.submit-btn');
 const container = document.querySelector('.grocery-container');
 const list = document.querySelector('.grocery-list');
 const clearBtn = document.querySelector('.clear-btn');
@@ -12,7 +12,9 @@ let editElement;
 let editFlag = false;
 let editId = "";
 // *********** EVENT LISTENERS ****************
-form.addEventListener('submit', addItem)
+form.addEventListener('submit', addItem);
+
+clearBtn.addEventListener('click', clearItems)
 
 
 // *********** FUNCTIONS ****************
@@ -87,7 +89,25 @@ function displayAlert(text, action) {
 // set back to default
 function setBackToDefault() {
     console.log('set back to default');
+    grocery.value = '';
+    editFlag = false;
+    editId = '';
+    submitBtn.textContent = 'submit';
 }
+
+function clearItems() {
+    const items = document.querySelectorAll('.grocery-item');
+    if(items.length > 0) {
+        items.forEach(function(item) {
+            list.removeChild(item);
+        })
+    }
+    container.classList.remove('show-container');
+    displayAlert('empty list', 'danger')
+    setBackToDefault();
+    // localStorage.removeItem('list');
+}
+
 
 
 // *********** LOCAL STORAGE ****************
