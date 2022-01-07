@@ -26,7 +26,7 @@ function addItem(e) {
     const value = grocery.value;
     const id = new Date().getTime().toString();
     // console.log(id);
-   
+
    // add item to list
     if(value && !editFlag) {
         // console.log('adding item to the list');
@@ -49,6 +49,12 @@ function addItem(e) {
                 <i class="fas fa-trash"></i>
             </button>
         </div>`
+        const deleteBtn = element.querySelector('.delete-btn');
+        const editBtn = element.querySelector('.edit-btn');
+
+        deleteBtn.addEventListener('click', deleteItem);
+        editBtn.addEventListener('click', editItem)
+
         // append child
         list.appendChild(element);
         // display alert
@@ -64,8 +70,13 @@ function addItem(e) {
 
 
 
-    } else if(!value && editFlag){
+    } else if(value && editFlag){
         // console.log('editing item');
+        editElement.innerHTML = value;
+        displayAlert('Value Changes', 'success');
+        // edit local storage(editId,)
+        setBackToDefault();
+
     } else{
         // console.log('empty string');
         displayAlert('Please enter a value', 'danger')
@@ -86,6 +97,37 @@ function displayAlert(text, action) {
     }, 1000)
 }    
 
+// delete btn function
+function deleteItem(e) {
+    // console.log('item deleted');
+    const element= e.currentTarget.parentElement.parentElement;
+    console.log(element);
+    const id = element.dataset.id;
+    list.removeChild(element);
+    if (list.children.length === 0) {
+        container.classList.remove('show-container');
+    }
+    displayAlert('Item removed', 'danger')
+    setBackToDefault();
+    // remove from local storage
+    // removeFromLocalStorage(id); 
+}
+
+
+// edit btn function
+function editItem(e) {
+    // console.log('edited item');
+    const element= e.currentTarget.parentElement.parentElement;
+    // set edit item
+    editElement = e.currentTarget.parentElement.previousElementSibling;
+    // set form value
+    grocery.value = editElement.innerHTML;
+    editFlag = true;
+    editId = element.dataset.id;
+    submitBtn.textContent = 'edit';
+
+}
+
 // set back to default
 function setBackToDefault() {
     console.log('set back to default');
@@ -95,6 +137,7 @@ function setBackToDefault() {
     submitBtn.textContent = 'submit';
 }
 
+// to clear items from grocery list
 function clearItems() {
     const items = document.querySelectorAll('.grocery-item');
     if(items.length > 0) {
@@ -112,7 +155,15 @@ function clearItems() {
 
 // *********** LOCAL STORAGE ****************
 function addToLocalStorage(id, value) {
-    console.log('added to local storage');
+    // console.log('added to local storage');
+}
+
+function removeFromLocalStorage(e){
+
+}
+
+function editLocalStorage(id, value) {
+    
 }
 
 // *********** SETUP ITEMS ****************
